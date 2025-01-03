@@ -1,12 +1,11 @@
 # This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# They are provided by a third-party and governed by separate
+# terms of service, privacy policy, and support documentation.
 
 # A sample workflow which sets up periodic OSV-Scanner scanning for vulnerabilities,
-# in addition to a PR check which fails if new vulnerabilities are introduced.
+# as well as a pull request check that fails if new vulnerabilities are introduced.
 #
-# For more examples and options, including how to ignore specific vulnerabilities,
+# For details on advanced usage, including ignoring specific vulnerabilities,
 # see https://google.github.io/osv-scanner/github-action/
 
 name: OSV-Scanner
@@ -17,32 +16,37 @@ on:
   merge_group:
     branches: [ "main" ]
   schedule:
-    - cron: '18 7 * * 2'
+    - cron: '18 7 * * 2'     # Weekly on Tuesdays at 07:18 UTC
   push:
     branches: [ "main" ]
 
 permissions:
-  # Require writing security events to upload SARIF file to security tab
+  # Required to upload the SARIF file to the Security tab
   security-events: write
-  # Read commit contents
+  # Needed to read commit contents
   contents: read
 
 jobs:
+  # Scans on either a push or scheduled basis.
   scan-scheduled:
     if: ${{ github.event_name == 'push' || github.event_name == 'schedule' }}
     uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@1f1242919d8a60496dd1874b24b62b2370ed4c78" # v1.7.1
     with:
-      # Example of specifying custom arguments
+      # Example of specifying custom scanner arguments
       scan-args: |-
         -r
         --skip-git
         ./
+
+  # Runs on pull requests or merge group events (GitHub Merge Queue),
+  # fails the PR if new vulnerabilities are introduced.
   scan-pr:
     if: ${{ github.event_name == 'pull_request' || github.event_name == 'merge_group' }}
     uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@1f1242919d8a60496dd1874b24b62b2370ed4c78" # v1.7.1
     with:
-      # Example of specifying custom arguments
+      # Example of specifying custom scanner arguments
       scan-args: |-
         -r
         --skip-git
         ./
+
