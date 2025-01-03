@@ -4,28 +4,73 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm"  # or "pip", "maven", "cargo", etc.
-    directory: "/"            # The root directory containing your package manifests
+  # Example: NPM Dependencies
+  - package-ecosystem: "npm"         # "npm", "pip", "maven", "cargo", etc.
+    directory: "/"                   # Root directory (or subfolder) for package manifests
     schedule:
-      interval: "weekly"      # "daily", "weekly", or "monthly"
-      day: "monday"           # Which day of the week for updates
-      time: "06:00"           # UTC time to create updates
-    # Limit how many simultaneous pull requests Dependabot can open
+      interval: "weekly"             # Possible values: "daily", "weekly", or "monthly"
+      day: "monday"                  # Day of the week for creating PRs
+      time: "06:00"                  # UTC time
+    # How many open Dependabot PRs to allow at once
     open-pull-requests-limit: 5
-    # Let Dependabot rebase automatically whenever it finds it necessary
+    # Automatically rebase PRs if there are merge conflicts
     rebase-strategy: "auto"
-    # Additional commit message/pull request settings
+
+    # Commit message & PR naming conventions
     commit-message:
       prefix: "deps"
       prefix-development: "deps-dev"
       include-scope: true
-    pull-request-title: "chore: Update dependencies"
+    pull-request-title: "chore(deps): Update dependencies"
+
+    # Apply these labels to new PRs
     labels:
       - "dependencies"
       - "automated"
-    # Optional: add reviewers or assignees
+
+    # Optional: auto-assign or auto-request reviews from specified users
     assignees:
       - "your-github-username"
     reviewers:
       - "colleague1"
       - "colleague2"
+
+    # Optional: provide a custom rebase schedule (in addition to the standard update schedule).
+    # This can help if your project requires frequent merges to stay in sync.
+    # rebase-strategy: "auto"
+
+    # Optional: selectively ignore certain dependencies or versions
+    # ignore:
+    #   - dependency-name: "some-package"
+    #     versions: [">=2.0.0, <2.2.0"]
+    #   - dependency-name: "another-package"
+    #     update-types: ["version-update:semver-minor", "version-update:semver-major"]
+
+  # Example: Additional ecosystem or folder (uncomment & customize if needed)
+  # - package-ecosystem: "github-actions"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #     day: "monday"
+  #     time: "06:00"
+  #   open-pull-requests-limit: 3
+  #   rebase-strategy: "auto"
+  #   commit-message:
+  #     prefix: "deps"
+  #     include-scope: true
+  #   pull-request-title: "chore(ci): Update GitHub Actions"
+  #   labels:
+  #     - "ci"
+  #     - "automated"
+  #   assignees:
+  #     - "devops-person"
+
+  # Example: Python dependencies
+  # - package-ecosystem: "pip"
+  #   directory: "/python"
+  #   schedule:
+  #     interval: "weekly"
+  #   open-pull-requests-limit: 5
+  #   rebase-strategy: "auto"
+  #   ...
+
