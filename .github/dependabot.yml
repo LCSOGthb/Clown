@@ -1,31 +1,76 @@
-# Dependabot Configuration
-# For full documentation:
+# Dependabot configuration file
+# For full documentation, see:
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 updates:
-  - package-ecosystem: "npm"  # or "pip", "maven", "cargo", etc.
-    directory: "/"            # The root directory containing your package manifests
+  # Example 1: NPM Dependencies (Frontend)
+  - package-ecosystem: "npm"
+    directory: "/"                     # Adjust if your package.json is in a subfolder
     schedule:
-      interval: "weekly"      # "daily", "weekly", or "monthly"
-      day: "monday"           # Which day of the week for updates
-      time: "06:00"           # UTC time to create updates
-    # Limit how many simultaneous pull requests Dependabot can open
+      interval: "weekly"               # "daily", "weekly", or "monthly"
+      day: "monday"                    # Which day to create PRs
+      time: "06:00"                    # UTC time
+    # Limits how many open Dependabot PRs can exist at once
     open-pull-requests-limit: 5
-    # Let Dependabot rebase automatically whenever it finds it necessary
+    # Dependabot rebases PRs when needed
     rebase-strategy: "auto"
-    # Additional commit message/pull request settings
+    # Additional config for commit messages / PR titles
     commit-message:
       prefix: "deps"
       prefix-development: "deps-dev"
       include-scope: true
-    pull-request-title: "chore: Update dependencies"
+    pull-request-title: "chore(deps): Update NPM dependencies"
     labels:
       - "dependencies"
       - "automated"
-    # Optional: add reviewers or assignees
+
+    # Optionally auto-assign or auto-request reviews
     assignees:
       - "your-github-username"
     reviewers:
-      - "colleague1"
-      - "colleague2"
+      - "team-member1"
+      - "team-member2"
+
+  # Example 2: GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    commit-message:
+      prefix: "deps"
+      include-scope: true
+    pull-request-title: "chore(deps): Update GitHub Actions"
+    labels:
+      - "ci"
+      - "automated"
+
+  # Example 3: Python (pip) – adjust if you use Poetry/requirements.txt
+  - package-ecosystem: "pip"
+    directory: "/python"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps-py"
+    pull-request-title: "chore(deps): Update Python dependencies"
+    labels:
+      - "dependencies"
+      - "automated"
+
+  # Example 4: Maven/Gradle for Java (if applicable)
+  # - package-ecosystem: "maven"
+  #   directory: "/java"
+  #   schedule:
+  #     interval: "weekly"
+  #   open-pull-requests-limit: 5
+  #   labels:
+  #     - "dependencies"
+  #     - "java"
+
