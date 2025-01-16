@@ -1,4 +1,4 @@
-/* Basic CSS to style the page */
+/* Basic Page Styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -25,49 +25,28 @@ main {
   text-align: center;
 }
 
-/* Styling for Developer Mode button */
+/* Developer Mode Button Styling */
 .dev-button {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  color: black; /* Plain text color */
+  background: none; /* No background */
+  border: none; /* Remove borders */
+  font-size: 16px;
   cursor: pointer;
 }
 
-/* Developer Mode UI */
-.dev-mode {
-  display: none;  /* Hidden by default */
-  position: fixed;
-  bottom: 50px;
-  left: 20px;
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  font-family: monospace;
-  font-size: 12px;
-  width: 300px;
-}
-
-.dev-mode p {
-  margin: 0;
-}
-
-/* Styling for Commit Info at the bottom right */
+/* Commit Info Styling */
 .commit-info {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-family: monospace;
-  font-size: 12px;
-  max-width: 300px;
-  word-wrap: break-word;
+  color: black; /* Plain text color */
+  font-family: Arial, sans-serif; /* Keep it simple */
+  font-size: 14px;
+  max-width: 300px; /* Limit width */
+  word-wrap: break-word; /* Wrap text nicely */
+  margin: 0;
+  padding: 0;
 }
