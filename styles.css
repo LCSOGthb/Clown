@@ -1,4 +1,4 @@
-/* Basic Page Styling */
+/* General Page Styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -30,23 +30,40 @@ main {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  color: black; /* Plain text color */
-  background: none; /* No background */
-  border: none; /* Remove borders */
+  color: white;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
 }
 
-/* Commit Info Styling */
+/* Developer Mode Output Styling */
+.dev-mode {
+  display: none; /* Initially hidden */
+  position: fixed;
+  bottom: 70px; /* Position above the button */
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 12px;
+  width: 300px;
+}
+
+/* Latest Commit Info Styling */
 .commit-info {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  color: black; /* Plain text color */
-  font-family: Arial, sans-serif; /* Keep it simple */
+  color: black;
+  font-family: Arial, sans-serif;
   font-size: 14px;
-  max-width: 300px; /* Limit width */
-  word-wrap: break-word; /* Wrap text nicely */
+  max-width: 300px;
+  word-wrap: break-word;
   margin: 0;
   padding: 0;
 }
