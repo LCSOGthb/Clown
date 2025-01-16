@@ -1,9 +1,9 @@
 // Toggle Developer Mode when button is clicked
-document.getElementById('dev-mode-toggle').addEventListener('click', function() {
+document.getElementById('dev-mode-toggle').addEventListener('click', function () {
   const devMode = document.getElementById('dev-mode');
   const consoleOutput = document.getElementById('console-output');
 
-  // Toggle the visibility of Developer Mode
+  // Toggle visibility of Developer Mode
   if (devMode.style.display === 'none' || devMode.style.display === '') {
     devMode.style.display = 'block';
     consoleOutput.innerText = 'Developer Mode activated. Logs are here...';
@@ -22,7 +22,7 @@ async function fetchLatestCommit() {
   try {
     const response = await fetch('https://api.github.com/repos/LCSOGthb/Games/commits');
     const commits = await response.json();
-    
+
     if (commits.length > 0) {
       const latestCommit = commits[0];
       const commitMessage = latestCommit.commit.message;
